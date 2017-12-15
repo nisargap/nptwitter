@@ -69,10 +69,14 @@ func main() {
 		fmt.Println("Retweeting...")
 		// retweet the tweet
 		api.Retweet(tweet.(anaconda.Tweet).Id, false)
-
-		fmt.Println("Waiting again...")
+		time.Sleep(10 * time.Second)
+		fmt.Println("Favoriting...")
+		_, err := api.Favorite(tweet.(anaconda.Tweet).Id)
+		if err != nil {
+			fmt.Println(err)
+		}
 		// wait for X seconds then follow that user
-		time.Sleep(timeWait * time.Second)
+		//time.Sleep(timeWait * time.Second)
 		/*
 			fmt.Println("Following...")
 			_, err := api.FollowUser(tweet.(anaconda.Tweet).User.ScreenName)
